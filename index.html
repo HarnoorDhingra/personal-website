@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Harnoor Dhingra</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body class="season-summer">
+  <!-- Custom cursor: shows your season (sapling / leaf / fall leaf / branch / your pic) -->
+  <div id="cursor-season-wrap" class="cursor-season-wrap" aria-hidden="true"></div>
+
+  <div class="page">
+    <div class="main-col">
+      <header>
+        <span class="eyebrow">hey, it's me —</span>
+        <h1>Harnoor Dhingra</h1>
+        <p class="header-sentence">a human being who thinks, writes, talks, and codes. <span class="header-sentence-accent">sometimes all at the same time.</span></p>
+      </header>
+
+      <div class="content-grid">
+        <section class="section" data-cursor="pen">
+          <span class="section-label">about me</span>
+          <p>My mom and dad are both doctors - say hi to <button type="button" class="pic-trigger ink-link" id="parents-pic-trigger" data-pic="parents">them</button>! Growing up, I'd have long discussions with them about why they were so wary of using tech in healthcare. Their answer was always some version of: <em>it's hard to trust something you don't fully understand.</em> Which, honestly? Fair. That's what put me on this path; I genuinely believe in building AI with a human lens.</p>
+          <p>I think a lot about multi-perspective generation, retrieval, bias, stereotype modeling, and personalization, especiallly how these interact inside large language systems. There's so much world knowledge encoded in these models, yet the hardest questions remain: how do you surface what you actually need? Whose ideas does a model flatten? Are we all eventually going to converge our thinking to one? If you think about these things too, reach out — always happy to talk.</p>
+          <p>Right now I'm at <em>Microsoft</em> in Cambridge, MA working on really cool problems with some of the best people.</p>
+          <p>Grew up in Punjab, India — where community is everything, and that stuck. I write poetry about the life stuff, attend live events including concerts, and romanticize the quotidian.</p>
+        </section>
+
+        <section class="section" data-cursor="pencil">
+          <span class="section-label">research</span>
+          <ul class="content-list">
+            <li><a href="https://www.youtube.com/watch?v=pUFr0sGGCFg" class="ink-link" target="_blank" rel="noopener">Deconstructing Identity Bias &amp; Stereotypes in LLMs</a> — oral at ACL Workshop 2023. How do you get a language model to see people with more regard? Chain-of-thought prompting + SHAP works.</li>
+            <li><a href="https://www.youtube.com/watch?v=FSPy4hSW45E" class="ink-link" target="_blank" rel="noopener">Multimodal Deep Learning for Personality Trait Prediction</a> — Hierarchical co-attention over speech & text for finding personality in a voice.</li>
+          </ul>
+        </section>
+
+        <section class="section" data-cursor="highlighter">
+          <span class="section-label">where I studied</span>
+          <p><em>Carnegie Mellon University</em> — M.S. Artificial Intelligence, 2023. Made <button type="button" class="pic-trigger cmu1" data-pic="cmu1">friends</button> <button type="button" class="pic-trigger cmu2" data-pic="cmu2">for</button> <button type="button" class="pic-trigger cmu3" data-pic="cmu3">life</button>.</p>
+          <p><em>BITS Pilani, Goa</em> — B.E. Computer Science, 2021. Found my <button type="button" class="pic-trigger bits1" data-pic="bits1">second</button> <button type="button" class="pic-trigger bits2" data-pic="bits2">family</button> here.</p>
+        </section>
+
+        <section class="section" data-cursor="highlighter">
+          <span class="section-label">find me @</span>
+          <p><a href="mailto:harnoordhingra@gmail.com" class="ink-link ink-link--big">harnoordhingra@gmail.com</a> &nbsp;·&nbsp; <a href="https://linkedin.com/in/harnoor-dhingra/" class="ink-link" target="_blank" rel="noopener">linkedin</a> &nbsp;·&nbsp; <a href="https://scholar.google.com/citations?user=dXBvAu4AAAAJ&hl=en" class="ink-link" target="_blank" rel="noopener">google scholar</a></p>
+        </section>
+      </div>
+
+    </div>
+
+    <aside class="tree-sidebar" aria-label="Visitor tree">
+      <div class="tree-wrapper">
+        <svg id="tree-svg" class="tree-svg" viewBox="0 0 200 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g id="tree-trunk"></g>
+          <g id="tree-leaves"></g>
+        </svg>
+      </div>
+      <p class="tree-caption">A tree by humans (and AI agents ???)</p>
+      <div class="tree-tally" aria-label="Leaves by season">
+        <p class="tree-tally-title">Pick your favorite season</p>
+        <p class="tree-tally-row" data-season="spring" role="button" tabindex="0" title="spring"><span class="tree-tally-emoji">🌱</span> spring <span id="tally-spring">0</span></p>
+        <p class="tree-tally-row" data-season="summer" role="button" tabindex="0" title="summer"><span class="tree-tally-emoji">☀️</span> summer <span id="tally-summer">0</span></p>
+        <p class="tree-tally-row" data-season="fall" role="button" tabindex="0" title="fall"><span class="tree-tally-emoji">🍂</span> fall <span id="tally-fall">0</span></p>
+        <p class="tree-tally-row" data-season="winter" role="button" tabindex="0" title="winter"><span class="tree-tally-emoji">❄️</span> winter <span id="tally-winter">0</span></p>
+        <p class="tree-tally-row" data-season="fashion" role="button" tabindex="0" title="fashion"><span class="tree-tally-emoji">💖</span> fashion <span id="tally-fashion">0</span></p>
+      </div>
+      <p class="visitor-count-hint" id="visitor-count-hint">Pick your favorite season to add a leaf to the tree</p>
+    </aside>
+  </div>
+
+  <div class="parents-pic-modal" id="parents-pic-modal" role="dialog" aria-label="Photo" aria-modal="true" hidden>
+    <div class="parents-pic-modal-backdrop" id="parents-pic-modal-backdrop"></div>
+    <div class="parents-pic-modal-inner">
+      <button type="button" class="parents-pic-modal-close" id="parents-pic-modal-close" aria-label="Close">&times;</button>
+      <img src="assets/parents.jpg" alt="Mom and dad" class="parents-pic-img" id="parents-pic-img"/>
+    </div>
+  </div>
+
+  <div class="season-modal" id="season-modal" role="dialog" aria-label="Pick your season" hidden>
+    <div class="season-modal-inner">
+      <p class="season-modal-title">pick your season!</p>
+      <p class="season-modal-sub">Sets the color vibe of the page. Switch anytime from the legend under the tree. Pick a season to add a leaf to the tree!</p>
+      <div class="season-buttons">
+        <button type="button" class="season-btn" data-season="spring">spring</button>
+        <button type="button" class="season-btn" data-season="summer">summer</button>
+        <button type="button" class="season-btn" data-season="fall">fall</button>
+        <button type="button" class="season-btn" data-season="winter">winter</button>
+        <button type="button" class="season-btn" data-season="fashion">fashion</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

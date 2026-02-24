@@ -1,0 +1,751 @@
+/* ============================================
+   CRUMPLED PAPER + INK PEN PERSONAL SITE
+   Cute, nerdy, hella interactive.
+   ============================================ */
+
+:root {
+  --bg: #fdf6ee;
+  --ink: #1c1108;
+  --ink-faint: #5a4535;
+  --ink-muted: #8a7060;
+  --rule: rgba(28, 17, 8, 0.09);
+  --accent: #bf3b2b;
+  --masthead-bg: #1c1108;
+  --paper: #fdf6ee;
+  --font-scribble: "Caveat", cursive;
+  --font-ink: "Kalam", cursive;
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+  /* Aliases for script/cursor compatibility */
+  --page-bg: var(--bg);
+  --ink-faded: var(--ink-muted);
+  --ink-light: #2d2620;
+}
+
+/* Season themes (match new HTML) */
+body.season-spring {
+  --bg: #f4faf0;
+  --ink: #122012;
+  --ink-faint: #2e5a2e;
+  --ink-muted: #5a8a5a;
+  --accent: #1e7a1e;
+  --rule: rgba(18, 32, 18, 0.09);
+  --masthead-bg: #1a3a1a;
+  --paper: #f4faf0;
+}
+body.season-summer {
+  --bg: #fffde7;
+  --ink: #2d2400;
+  --ink-faint: #6b5d00;
+  --ink-muted: #8a7700;
+  --accent: #c9a227;
+  --rule: rgba(45, 36, 0, 0.1);
+  --masthead-bg: #4a4000;
+  --paper: #fffde7;
+}
+body.season-fall {
+  --bg: #f0e6dc;
+  --ink: #251a0d;
+  --ink-faint: #5c4a35;
+  --ink-muted: #7d6b5a;
+  --accent: #8b6914;
+  --rule: rgba(37, 26, 13, 0.1);
+  --masthead-bg: #2d1f0d;
+  --paper: #f0e6dc;
+}
+body.season-winter {
+  --bg: #f0f6ff;
+  --ink: #080e1e;
+  --ink-faint: #1e3560;
+  --ink-muted: #4a6a90;
+  --accent: #0d5a9e;
+  --rule: rgba(8, 14, 30, 0.09);
+  --masthead-bg: #080e1e;
+  --paper: #f0f6ff;
+}
+body.season-fashion {
+  --bg: #fff0f6;
+  --ink: #200010;
+  --ink-faint: #600030;
+  --ink-muted: #a04070;
+  --accent: #b0005a;
+  --rule: rgba(32, 0, 16, 0.09);
+  --masthead-bg: #1a0010;
+  --paper: #fff0f6;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--ink);
+  background: var(--bg);
+  overflow-x: hidden;
+  transition: background 0.6s ease, color 0.6s ease;
+}
+
+/* Hide default cursor when custom cursor is active */
+body.custom-cursor-active {
+  cursor: none;
+}
+
+body.custom-cursor-active a,
+body.custom-cursor-active button {
+  cursor: none;
+}
+
+/* ---- Masthead ---- */
+.masthead {
+  background: var(--masthead-bg);
+  padding: 0.65rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.6s ease;
+}
+.masthead-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+.masthead-date {
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* ---- Page layout: main column + sidebar (like pasted HTML) ---- */
+.page {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  padding: 0 1rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.main-col {
+  width: min(680px, 100%);
+  flex-shrink: 0;
+}
+
+/* ---- Header ---- */
+header {
+  padding: 2.2rem 2.5rem 1.8rem;
+  border-bottom: 3px solid var(--ink);
+  transition: border-color 0.6s ease;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+header h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 9vw, 5rem);
+  line-height: 0.92;
+  letter-spacing: -1.5px;
+  color: var(--ink);
+  margin: 0;
+  padding: 0;
+  transition: color 0.6s ease;
+  white-space: nowrap;
+}
+
+.header-sentence {
+  margin-top: 0.9rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1rem, 2.8vw, 1.25rem);
+  color: var(--ink-faint);
+  line-height: 1.4;
+  transition: color 0.6s ease;
+}
+
+.header-sentence-accent {
+  font-style: normal;
+  color: var(--accent);
+}
+
+/* ---- Content grid & sections ---- */
+.content-grid {
+  padding: 0 2.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.section {
+  margin-top: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+  transition: border-color 0.6s ease;
+}
+
+.section:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.cursor-hint {
+  font-size: 0.85rem;
+  color: var(--ink-faded);
+  font-weight: 300;
+}
+
+.cursor-hint kbd {
+  display: inline-block;
+  padding: 0.15em 0.4em;
+  font-family: var(--font-ink);
+  font-size: 0.9em;
+  background: rgba(0,0,0,0.06);
+  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.section-label {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.65rem;
+  font-family: var(--font-body);
+}
+
+.section p {
+  font-size: 0.97rem;
+  line-height: 1.85;
+  margin-bottom: 0.8rem;
+  color: var(--ink-faint);
+  font-weight: 400;
+}
+
+.section p em {
+  font-style: italic;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.content-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.content-list li {
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--ink-faint);
+  font-weight: 400;
+}
+
+.content-list li:last-child {
+  border-bottom: none;
+}
+
+.content-list li a {
+  font-weight: 500;
+}
+
+/* Friends / family pic words: normal color + very subtle dotted underline */
+.cmu1, .cmu2, .cmu3,
+.bits1, .bits2 {
+  cursor: pointer;
+  border: none !important;
+  background: transparent !important;
+  color: inherit !important;
+  font: inherit;
+  padding: 0 1px;
+  line-height: inherit;
+  box-shadow: none !important;
+  text-decoration-line: underline !important;
+  text-decoration-style: dotted !important;
+  text-decoration-thickness: 0.8px;
+  text-decoration-color: rgba(28, 17, 8, 0.1);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.15s ease;
+}
+.cmu1:hover, .cmu2:hover, .cmu3:hover,
+.bits1:hover, .bits2:hover {
+  opacity: 1 !important;
+  background: rgba(28, 17, 8, 0.08) !important;
+  box-shadow: 0 0 0 1px rgba(28, 17, 8, 0.1) !important;
+  border-radius: 3px;
+  text-decoration-color: rgba(28, 17, 8, 0.14);
+}
+
+/* Hand-drawn style links */
+.ink-link {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1.5px solid currentColor;
+  transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+  position: relative;
+}
+
+.ink-link:hover {
+  background-color: color-mix(in srgb, var(--accent) 18%, transparent);
+  border-radius: 2px;
+}
+
+.ink-link--big {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.05rem;
+}
+
+
+/* ---- Custom cursor: your season (sapling / leaf / branch / your pic) ---- */
+.cursor-season-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  width: 28px;
+  height: 28px;
+  margin-left: -14px;
+  margin-top: -14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursor-season-wrap.cursor-season-fashion {
+  width: 56px;
+  height: 56px;
+  margin-left: -28px;
+  margin-top: -28px;
+}
+
+.cursor-season-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.cursor-season-img {
+  max-width: 56px;
+  max-height: 56px;
+  width: auto;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.cursor-fashion-fallback {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #ec407a;
+  border: 2px solid rgba(0,0,0,0.1);
+}
+
+/* ---- Tree sidebar ---- */
+.tree-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: sticky;
+  top: 1rem;
+  align-self: flex-start;
+  margin-left: 2rem;
+  margin-top: 2.2rem;
+}
+
+.tree-caption {
+  font-size: 0.7rem;
+  font-style: italic;
+  color: var(--ink-muted);
+  text-align: center;
+  margin: 0.15rem 0 0.35rem 0;
+  line-height: 1.35;
+}
+
+.tree-wrapper {
+  background: none;
+  border: none;
+  padding: 0;
+  width: 160px;
+  height: 520px;
+}
+
+.tree-wrapper .tree-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tree-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.tree-svg .trunk {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tree-svg .leaf {
+  transition: opacity 0.3s ease;
+}
+
+.tree-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.tree-legend-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 6px;
+  font-size: 1.25rem;
+  line-height: 1;
+  background: rgba(28, 17, 8, 0.05);
+  transition: transform 0.15s ease, background 0.15s ease;
+  user-select: none;
+}
+
+.tree-legend-item:hover {
+  background: rgba(28, 17, 8, 0.09);
+  transform: scale(1.1);
+}
+
+.tree-legend-item.active {
+  background: rgba(28, 17, 8, 0.14);
+}
+
+.tree-legend-item:focus {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.tree-tally {
+  width: 100%;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+}
+
+.tree-tally-title {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin: 0 0 0.4rem 0;
+}
+
+.tree-tally-row {
+  margin: 0.2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 0.25rem 0.35rem;
+  margin-left: -0.35rem;
+  margin-right: -0.35rem;
+  transition: background 0.15s, color 0.15s;
+}
+.tree-tally-row:hover {
+  background: rgba(28, 17, 8, 0.08);
+  color: var(--ink);
+}
+.tree-tally-row.active {
+  background: rgba(28, 17, 8, 0.12);
+  color: var(--ink);
+}
+
+.tree-tally-emoji {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.tree-tally-row span:last-child {
+  margin-left: auto;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.visitor-count-hint {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  opacity: 0.85;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+.visitor-count-hint[hidden] {
+  display: none;
+}
+
+/* ---- Season modal (first-time visitor: pick season to add a leaf) ---- */
+/* Parents pic lightbox */
+.pic-trigger,
+.parents-pic-trigger {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  color: var(--accent);
+  text-decoration: none;
+  box-shadow: 0 1px 0 0 currentColor;
+  transition: box-shadow 0.2s, color 0.2s, opacity 0.2s;
+}
+.pic-trigger:hover,
+.parents-pic-trigger:hover {
+  opacity: 0.75;
+}
+.parents-pic-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  pointer-events: auto;
+}
+.parents-pic-modal[hidden] {
+  display: none !important;
+}
+.parents-pic-modal.is-open {
+  display: flex !important;
+}
+.parents-pic-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 17, 8, 0.6);
+  backdrop-filter: blur(6px);
+}
+.parents-pic-modal-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.parents-pic-modal-close {
+  position: absolute;
+  top: -2rem;
+  right: 0;
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+.parents-pic-modal-close:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+.parents-pic-img {
+  display: block;
+  max-width: 90vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  position: relative;
+  z-index: 2;
+}
+
+.season-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(28, 17, 8, 0.55);
+  backdrop-filter: blur(4px);
+  pointer-events: auto;
+}
+
+.season-modal[hidden] {
+  display: none !important;
+}
+
+.season-modal-inner {
+  background: var(--bg);
+  padding: 2rem 2.4rem;
+  border-radius: 8px;
+  border: 2px solid var(--ink);
+  max-width: 380px;
+  width: 90%;
+}
+
+.season-modal-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--ink);
+  margin: 0 0 0.4rem 0;
+}
+
+.season-modal-sub {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  margin: 0 0 1.4rem 0;
+  line-height: 1.5;
+}
+
+.season-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.season-btn {
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  padding: 0.45rem 1rem;
+  border: 1.5px solid var(--rule);
+  background: transparent;
+  color: var(--ink-faint);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+body.custom-cursor-active .season-btn {
+  cursor: none;
+}
+
+.season-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---- Small responsive tweaks ---- */
+@media (max-width: 700px) {
+  .masthead {
+    padding: 0.5rem 1rem;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .masthead-label,
+  .masthead-date {
+    font-size: 0.55rem;
+  }
+
+  .page {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0.75rem 2rem;
+  }
+
+  header {
+    padding: 1.5rem 1.25rem 1.25rem;
+  }
+
+  .content-grid {
+    padding: 0 1.25rem;
+  }
+
+  header h1 {
+    font-size: clamp(2rem, 8vw, 3rem);
+    white-space: normal;
+  }
+
+  .header-sentence {
+    font-size: 0.95rem;
+  }
+
+  .tree-sidebar {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-left: 0;
+    margin-top: 1.5rem;
+    padding-top: 0;
+  }
+
+  .tree-wrapper {
+    width: 120px;
+    height: 180px;
+  }
+
+  .tree-legend {
+    font-size: 0.85rem;
+  }
+
+  html {
+    font-size: 16px;
+  }
+}
+
+/* Touch devices: show default cursor (custom cursor is mouse-only) */
+@media (hover: none) and (pointer: coarse) {
+  body,
+  body.custom-cursor-active,
+  body.custom-cursor-active a,
+  body.custom-cursor-active button {
+    cursor: auto;
+  }
+
+  .cursor-season-wrap {
+    display: none;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .cursor-dot,
+  .cursor-ring {
+    transition: none;
+  }
+}

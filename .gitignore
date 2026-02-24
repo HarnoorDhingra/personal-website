@@ -1,0 +1,15 @@
+node_modules/
+data/visits.json
+
+# Local/editor/system noise
+.DS_Store
+.env
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Backup files in this repo
+* copy.*
+
+# Local demo-only file
+tree-demo.html
