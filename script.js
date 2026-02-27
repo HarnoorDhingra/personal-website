@@ -258,7 +258,7 @@
     else if (season === "summer") html = summerCursor();
     else if (season === "fall") html = fallCursor();
     else if (season === "winter") html = winterCursor();
-    else if (season === "fashion") html = isTouchDevice ? summerCursor() : fashionCursor();
+    else if (season === "fashion") html = fashionCursor();
     else html = summerCursor();
     cursorWrap.innerHTML = html;
     cursorWrap.className = "cursor-season-wrap cursor-season-" + season;
@@ -425,7 +425,7 @@
     return g;
   }
 
-  var LEAF_BASE_SIZE = 4.5;
+  var LEAF_BASE_SIZE = 6.5;
 
   // keep 150–500 size feel; don’t shrink much after 500
   function leafSz(total) {
